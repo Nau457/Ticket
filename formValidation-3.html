@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body
+        {
+            background-image: url(Images/sale-2.jpg);
+            background-size: 100% 100%;
+        }
+        .pass
+        {
+            color:green
+        }
+        .fail
+        {
+            color: red;
+        }
+        #form-validate
+        {
+            height: 400px;
+            width: 350px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin: 100px auto;
+            border-radius: 2px;
+        }
+      .beauty
+        {
+            height: 30px;
+            width: 250px;
+            margin-top: 20px;
+            border-radius: inherit;
+            border: none;
+            outline: none;
+        }
+        #high-light
+        {
+           padding-top: 30px;
+        }
+        input[type='submit']
+        {
+            height: 40px;
+            width: 150px;
+            margin-top: 20px;
+            border-radius: inherit;
+            border: none;
+            color: black;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 800;
+            font-size: 18px;
+        }
+        ::placeholder
+        {
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 600;
+            color: black;
+            font-size: 15px;
+        }
+        .fa-solid
+        {
+            font-size: 30px;
+           
+        }
+    </style>
+</head>
+<body>
+       <form id="form-validate">
+                       <h1 id="high-light">User Login</h1>
+        <input type="text" placeholder="Enter Your Username" id="user-name" class="beauty" required>
+        <i class="fa-solid fa-square-check" id="check-btn1"></i>
+        <i class="fa-solid fa-square-xmark" id="cross-btn1"></i> <br>
+
+        <input type="email" placeholder="Enter Your Email" id="user-email" class="beauty" required>
+        <i class="fa-solid fa-square-check" id="check-btn2"></i>
+        <i class="fa-solid fa-square-xmark" id="cross-btn2"></i> <br>
+
+        <input type="password" placeholder="Enter Your Password" id="user-password" class="beauty" required>
+        <i class="fa-solid fa-square-check" id="check-btn3"></i>
+        <i class="fa-solid fa-square-xmark" id="cross-btn3"></i> <br>
+
+        <input type="password" placeholder="Enter Your Confirm Password" id="user-con-password" class="beauty" required>
+        <i class="fa-solid fa-square-check" id="check-btn4"></i>
+        <i class="fa-solid fa-square-xmark" id="cross-btn4"></i> <br>
+        <input type="submit" value="Login">
+       </form>
+
+       <script>
+    let checkButton1 = document.querySelector('#check-btn1')
+  
+    checkButton1.classList.remove('fa-square-check')
+    let crossButton1 = document.querySelector('#cross-btn1')
+    crossButton1.classList.remove('fa-square-xmark')
+
+    let checkButton2 = document.querySelector('#check-btn2')
+    checkButton2.classList.remove('fa-square-check')
+    let crossButton2 = document.querySelector('#cross-btn2')
+    crossButton2.classList.remove('fa-square-xmark')
+
+    let checkButton3 = document.querySelector('#check-btn3')
+    checkButton3.classList.remove('fa-square-check')
+    let crossButton3 = document.querySelector('#cross-btn3')
+    crossButton3.classList.remove('fa-square-xmark')
+
+    let checkButton4 = document.querySelector('#check-btn4')
+    checkButton4.classList.remove('fa-square-check')
+    let crossButton4 = document.querySelector('#cross-btn4')
+    crossButton4.classList.remove('fa-square-xmark')
+
+    
+    let formValid = document.querySelector('#form-validate')
+    //console.log(formValid)
+    let userName = document.querySelector('#user-name')
+    //console.log(userName)
+    let userEmail = document.querySelector('#user-email')
+    //console.log(userEmail)
+    let userPassword = document.querySelector('#user-password')
+    //console.log(userPassword)
+    let confirmPassword = document.querySelector('#user-con-password')
+    //console.log(confirmPassword)
+
+    formValid.addEventListener('submit',function(event)
+    {
+        event.preventDefault()
+        if(valideteUser() & validateEmail() & validatePassword() & validateConPassword())
+    {
+        alert('Data store Succesfully')
+    }
+    else
+    {
+        alert('Please fill the form correctly')
+    }
+    })
+
+    userName.addEventListener('keyup',function()
+{
+    valideteUser()
+})
+
+ function valideteUser()
+ {
+    let regEx = /^[0-9a-zA-Z]{6,16}$/
+    if(regEx.test(userName.value))
+ {
+    valid(checkButton1,crossButton1)
+    return true
+ }
+ else
+ {
+    if(userName.value ==='')
+ {
+    emptyCheck(crossButton1)
+    console.log('#emptyCheck')
+ }
+ else{
+    invalid(checkButton1,crossButton1)
+    return false
+ }
+ }
+ }
+
+ userEmail.addEventListener('keyup', function()
+{
+   validateEmail()
+})
+
+function  validateEmail()
+{
+    let regEx = /^[a-z0-9][\w\.]+\@\w+?(\.\w+){1,}$/
+    if(regEx.test(userEmail.value))
+{
+    valid(checkButton2,crossButton2)
+    return true
+}
+else
+{
+    invalid(checkButton2,crossButton2)
+    return false
+}
+}
+
+userPassword.addEventListener('keyup', function()
+{
+    validatePassword()
+})
+
+function validatePassword()
+{
+    let regEx= /^[0-9a-zA-Z]{8,16}$/
+    if(regEx.test(userPassword.value))
+{
+    valid(checkButton3,crossButton3)
+    return true
+}
+else
+{
+    invalid(checkButton3,crossButton3)
+   return false
+}
+}
+
+confirmPassword.addEventListener('keyup', function()
+{
+    validateConPassword()
+})
+
+function validateConPassword()
+{
+    let regEx = /^[0-9a-zA-Z]{8,16}$/
+    if(regEx.test(confirmPassword.value) & userPassword.value == confirmPassword.value)
+{
+    valid(checkButton4,crossButton4)
+    return true
+}
+else
+{
+    invalid(checkButton4,crossButton4)
+    return false
+}
+}
+
+function valid(checkBtn1,crossBtn2)
+{
+    checkBtn1.classList.add('fa-square-check')
+    checkBtn1.classList.add('pass')
+    crossBtn2.classList.remove('fa-square-xmark')
+    crossBtn2.classList.remove('fail')
+}
+function invalid(checkBtn1,crossBtn2)
+{
+    checkBtn1.classList.remove('fa-square-check')
+    checkBtn1.classList.remove('pass')
+    crossBtn2.classList.add('fa-square-xmark')
+    crossBtn2.classList.add('fail')
+}
+ function emptyCheck(btn1)
+ {
+    btn1.classList.remove('fa-square-xmark')
+    btn1.classList.remove('fail')
+ }
+       </script>
+</body>
+</html>
